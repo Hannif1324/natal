@@ -1,0 +1,442 @@
+@import "tailwindcss";
+
+/* =====================================================
+   NATAL SMK PGRI 1 KEDIRI - GLOBAL STYLES
+   Modern Javanese Theme with Variations
+   ===================================================== */
+
+/* =====================================================
+   CSS VARIABLES - DESIGN TOKENS
+   ===================================================== */
+:root {
+  /* Primary Colors - Javanese Palette */
+  --color-charcoal: #2C2C2C;
+  --color-mahogany: #4A0404;
+  --color-gold: #C5A059;
+  --color-gold-light: #D4B06A;
+  --color-batik-brown: #8B5A2B;
+  --color-cream: #FDF6E3;
+
+  /* Secondary Colors - Variety */
+  --color-deep-red: #6B1010;
+  --color-forest: #1A3A1A;
+  --color-navy: #1A1A3A;
+  --color-bronze: #A67C52;
+
+  /* Neutral Colors */
+  --color-bg-dark: #0F0F0F;
+  --color-bg-section: #1A1A1A;
+  --color-bg-card: #252525;
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #A0A0A0;
+  --color-text-muted: #666666;
+
+  /* Gradients */
+  --gradient-gold: linear-gradient(135deg, #C5A059 0%, #D4B06A 50%, #C5A059 100%);
+  --gradient-dark: linear-gradient(180deg, #0F0F0F 0%, #1A1A1A 100%);
+  --gradient-mahogany: linear-gradient(135deg, #4A0404 0%, #6B1010 100%);
+  --gradient-batik: linear-gradient(135deg, #8B5A2B 0%, #A67C52 100%);
+
+  /* Shadows */
+  --shadow-gold: 0 4px 20px rgba(197, 160, 89, 0.3);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+
+  /* Typography */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Spacing */
+  --section-padding: clamp(4rem, 8vw, 8rem);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+/* =====================================================
+   BASE STYLES
+   ===================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Heading Font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* =====================================================
+   CUSTOM SCROLLBAR
+   ===================================================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-gold);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-light);
+}
+
+/* =====================================================
+   SELECTION STYLE
+   ===================================================== */
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+/* =====================================================
+   REUSABLE COMPONENT CLASSES
+   ===================================================== */
+
+/* Section Base - Different backgrounds for variety */
+.section-base {
+  padding: var(--section-padding) 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-dark {
+  background-color: var(--color-bg-dark);
+}
+
+.section-charcoal {
+  background-color: var(--color-charcoal);
+}
+
+.section-mahogany {
+  background: var(--gradient-mahogany);
+}
+
+.section-batik {
+  background-color: var(--color-batik-brown);
+}
+
+/* Section with pattern overlay */
+.section-pattern {
+  position: relative;
+}
+
+.section-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/vecteezy_brown-ornament-batik-mega-mendung-cirebon-indonesia-with_24037227.webp');
+  background-size: 400px;
+  background-repeat: repeat;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* Container */
+.container-custom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Gold Accent Border */
+.border-gold {
+  border: 2px solid var(--color-gold);
+}
+
+.border-gold-subtle {
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+/* Card Styles - Multiple variants */
+.card-base {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card-base:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-gold {
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, rgba(197, 160, 89, 0.1) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.card-mahogany {
+  background: linear-gradient(135deg, var(--color-mahogany) 0%, var(--color-deep-red) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: var(--gradient-gold);
+  color: var(--color-charcoal);
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(197, 160, 89, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-gold);
+  font-weight: 600;
+  padding: 0.875rem 2rem;
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  background: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+/* Text Styles */
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-gradient-gold {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section Titles */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  color: var(--color-gold);
+  text-align: center;
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+}
+
+/* Decorative Elements */
+.ornament-line {
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-gold);
+  margin: 0 auto 2rem;
+  border-radius: 2px;
+}
+
+.ornament-diamond {
+  width: 12px;
+  height: 12px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+  margin: 0 auto;
+}
+
+/* =====================================================
+   GRAYSCALE FILTER FOR SPONSORS
+   ===================================================== */
+.grayscale-hover {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all var(--transition-normal);
+}
+
+.grayscale-hover:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* =====================================================
+   ANIMATION CLASSES
+   ===================================================== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-gold {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 15px rgba(197, 160, 89, 0);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* =====================================================
+   JAVANESE ORNAMENT BORDERS
+   ===================================================== */
+.ornament-border-top {
+  position: relative;
+}
+
+.ornament-border-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: var(--gradient-gold);
+  border-radius: 2px;
+}
+
+.ornament-corner {
+  position: relative;
+}
+
+.ornament-corner::before,
+.ornament-corner::after {
+  content: '✦';
+  position: absolute;
+  color: var(--color-gold);
+  font-size: 1.5rem;
+}
+
+.ornament-corner::before {
+  top: -0.5rem;
+  left: -0.5rem;
+}
+
+.ornament-corner::after {
+  bottom: -0.5rem;
+  right: -0.5rem;
+}
+
+/* =====================================================
+   RESPONSIVE UTILITIES
+   ===================================================== */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: clamp(3rem, 6vw, 5rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+}
+
+/* =====================================================
+   GLASS MORPHISM EFFECT
+   ===================================================== */
+.glass {
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+/* =====================================================
+   FORM INPUT STYLES
+   ===================================================== */
+.input-base {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.input-base:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
+}
+
+.input-base::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Radio/Checkbox custom */
+.radio-custom {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-gold);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.radio-custom:checked {
+  background: var(--color-gold);
+  box-shadow: inset 0 0 0 4px var(--color-bg-card);
+}

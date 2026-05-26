@@ -1,0 +1,50 @@
+# [AGENT-GENERATED]
+# Description : GitHub Actions workflow for building and pushing the Natal Next.js web application Docker image to Docker Hub
+# Created     : 2026-05-25
+# Modified    : 2026-05-25 
+# Part of     : CI/CD Deployment
+
+name: Natal NextJS Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & Push Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          build-args: |
+            NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+            NEXT_PUBLIC_N8N_WEBHOOK_URL=${{ secrets.NEXT_PUBLIC_N8N_WEBHOOK_URL }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/natal-nextjs-web:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/natal-nextjs-web:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
