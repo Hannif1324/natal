@@ -20,6 +20,10 @@
 # production
 /build
 
+# docker image exports (too large for GitHub)
+*.tar
+/image-build/
+
 # misc
 .DS_Store
 *.pem
